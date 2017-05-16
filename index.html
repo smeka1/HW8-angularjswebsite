@@ -1,0 +1,806 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, shrink-to-fit=no, initial-scale=1">
+    <meta name="description" content="Bootstrap webapp for Congress API">
+    <meta name="author" content="Sriramtej">
+
+    <title>Congress API Bootstrap webapp</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+   
+    <!-- Custom CSS -->
+    <link href="css/simple-sidebar.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="https://use.fontawesome.com/cff7e5d248.js"> </script>
+   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <script src = "js/myscrypt.js"></script>
+    <script src="js/jquery.js"></script>
+    
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+    
+    <script src="js/dirPagination.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-sanitize/1.5.8/angular-sanitize.min.js"></script>
+    <style>
+        
+    .firstheading {width=100%; background-color: whitesmoke; text-align: center; top: 0px;
+        position: fixed;
+    right: 0;
+    left: 0;
+    z-index: 1030;
+        }
+    
+        .cont{width:auto; padding-left: 6%; margin-left: 9%; margin-right: 3%; position: relative;}
+        
+    .firsttable{ 
+        border-collapse: separate;
+        border: 1px solid lightgrey; padding-right: 0px; border-radius: 8px; -webkit-border-radius: 8px; -moz-border-radius: 8px;}
+    
+     body {
+    overflow-y:auto;
+      }
+    
+    .icon-bar a {
+    width: 4%;
+    padding: none;
+    float: left;
+    transition: all 0.5s ease;
+    color: grey;
+    font-size: 26px;
+}
+        
+        hr.style1{ margin-top: 0px; position: relative;
+	border-top: 2px solid #8c8b8b;
+}
+        .nggsrc {max-width: 40px;}
+        .nggsrc1 {max-width: 20px;}
+    </style>
+
+
+    </head>
+
+
+    <body ng-app="myApp"  ng-controller="myCtrl" ng-cloak>
+    <!-- <nav class="navbar navbar-default navbar-fixed-top">   -->
+        
+        <div class="firstheading">
+     <span class="icon-bar">
+         <a href="#navtoggle" id="navtoggle"><i class="fa fa-bars"></i></a>   <!-- <adata-toggle="collapse" data-target="#myNavbar"></i>-->
+         </span>
+          <a href="http://sunlightfoundation.com" target="_blank"><img style='max-width:75px;' src="logo.png" alt="LOGO" max-width:62%; max-height:62%></a> <b>  <span style="font-size:1.0em;"> Congress API</span></b>
+      </div>
+        
+        <br/>
+        <br/>
+        <div id="container">
+      
+        <div id="sidebar-wrapper" style="margin-top:0px;padding-top:0px;">
+            <p> </p>
+            <ul class="sidebar-nav">
+                <li>
+                    <a data-toggle="tab" href="#legislators"> Legislators  </a>
+                </li>
+                <li>
+                    <a data-toggle="tab" href="#bills">Bills</a>
+                </li>
+                <li>
+                    <a data-toggle="tab" href="#committees">Committees</a>
+                </li>
+                <li>
+                    <a data-toggle="tab" href="#favorites">Favorites</a>
+                </li>
+            </ul>
+        </div>
+          
+           
+             <div class="tab-content" id=Mainnavbartabs>
+                 
+                     <div id="legislators" class="tab-pane fade in active">
+          <div id="LCarousel" class="carousel slide" data-interval="false">
+               <div class="carousel-inner">
+            
+                <div class = "item active" id=CarouselItem1>  
+                        <div class="container cont">
+                <br />
+              
+              <h2>Legislators</h2>  <hr class="style1"/> 
+              <div class="item active"> 
+			<ul class="nav nav-tabs ">
+				<li class="active"><a href="#ByState" data-toggle="tab">By State</a></li>
+				<li><a href="#House" data-toggle="tab">House</a></li>
+				<li><a href="#Senate" data-toggle="tab">Senate</a></li>
+			</ul>
+
+			<div class="tab-content">
+				<div class="tab-pane fade in active"  id="ByState">
+					
+                    
+                <div class="row">
+                    <div class="col-lg-12">
+            <div class="table-responsive" >
+                        <table class="table  table-hover  firsttable">
+            <thead>
+                <tr><th>Legislators by State</th>
+                <td></td>    <td></td><td></td><td></td>
+                <td> <div class="col-xs-4 col-lg-6"> 
+            
+            <select ng-model="qdm" id="dropdowm" class="form-control"> 
+                        <option value="" selected="selected">All States</option>
+                  <option value="Alabama">Alabama</option>
+                  <option value="Alaska">Alaska</option>
+                  <option value="Arizona">Arizona</option>
+                  <option value="Arkansas">Arkansas</option>
+                  <option value="California">California</option>
+                  <option value="Colorado">Colorado</option>
+                  <option value="Connecticut">Connecticut</option>
+                  <option value="Delaware">Delaware</option>
+                  <option value="Florida">Florida</option>
+                  <option value="Georgia">Georgia</option>
+                  <option value="Hawaii">Hawaii</option>
+                  <option value="Idaho">Idaho</option>
+                  <option value="Illinois">Illinois</option>
+                  <option value="Indiana">Indiana</option>
+                  <option value="Iowa">Iowa</option>
+                  <option value="Kansas">Kansas</option>
+                  <option value="Kentucky">Kentucky</option>
+                  <option value="Louisiana">Louisiana</option>
+                  <option value="Maine">Maine</option>
+                  <option value="Maryland">Maryland</option>
+                  <option value="Massachusetts">Massachusetts</option>
+                  <option value="Michigan">Michigan</option>
+                  <option value="Minnesota">Minnesota</option>
+                  <option value="Mississippi">Mississippi</option>
+                  <option value="Missouri">Missouri</option>
+                  <option value="Montana">Montana</option>
+                  <option value="Nebraska">Nebraska</option>
+                  <option value="Nevada">Nevada</option>
+                  <option value="New Hampshire">New Hampshire</option>
+                  <option value="New Jersey">New Jersey</option>
+                  <option value="New Mexico">New Mexico</option>
+                  <option value="New York">New York</option>
+                  <option value="North Carolina">North Carolina</option>
+                  <option value="North Dakota">North Dakota</option>
+                  <option value="Ohio">Ohio</option>
+                  <option value="Oklahoma">Oklahoma</option>
+                  <option value="Oregon">Oregon</option>
+                  <option value="Pennsylvania">Pennsylvania</option>
+                  <option value="Rhode Island">Rhode Island</option>
+                  <option value="South Carolina">South Carolina</option>
+                  <option value="South Dakota">South Dakota</option>
+                  <option value="Tennessee">Tennessee</option>
+                  <option value="Texas">Texas</option>
+                  <option value="Utah">Utah</option>
+                  <option value="Vermont">Vermont</option>
+                  <option value="Virginia">Virginia</option>
+                  <option value="Washington">Washington</option>
+                  <option value="West Virginia">West Virginia</option>
+                  <option value="Wisconsin">Wisconsin</option>
+                  <option value="Wyoming">Wyoming</option>
+              </select>
+                        </div></td>
+                </tr>
+              <tr>
+                <th>Party</th>
+                <th>Name</th>
+                <th>Chamber</th>
+                <th>District</th>
+                  <th>State</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr dir-paginate="items in infol |  filter:qdm | orderBy:['state','name']| itemsPerPage: 10 track by $index"> 
+                  
+                <td><img class="nggsrc" ng-src="{{items.party}}"></td>
+                <td>{{items.name}}</td>
+                <td><img class="nggsrc1" ng-src="{{items.ci}}">{{items.chamber1}}</td>
+                <td>{{items.district}}</td>
+                  <td>{{items.state}}</td>
+                <td><a href="#LCarousel" data-slide="next">
+                    <button type="button" class="btn btn-primary" ng-click="scopeviewdet(items.bioguide_id)">View Details</button></a></td>
+              </tr>
+            </tbody>
+              
+          </table>
+                    </div>
+               <dir-pagination-controls
+       max-size="7"
+       direction-links="true"
+       boundary-links="true" >
+    </dir-pagination-controls>
+                    </div>
+                </div>    
+				</div>      <!-- Tab for legis -->
+                
+				<div class="tab-pane fade"  id="House">
+					
+                    <div class="table-responsive" >
+                    <div class="row">
+                    <div class="col-lg-12">
+            <table class="table table-hover firsttable">
+            <thead>
+                <tr><th>Legislators by State</th>
+                <td></td>    <td></td><td></td><td></td>
+                <td> <div class="col-xs-5 col-lg-6"> <label class="sr-only" for="searchH">Search</label>
+                    <input ng-model="qhh" id="searchH" class="form-control" placeholder="Search.."> </div></td>
+                </tr>
+              <tr>
+                <th>Party</th>
+                <th>Name</th>
+                <th>Chamber</th>
+                <th>District</th>
+                  <th>State</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr dir-paginate="items in infoh |  filter:qhh| orderBy : ['name']| itemsPerPage:10 track by $index"> 
+                  
+                <td><img class="nggsrc" ng-src="{{items.party}}"></td>
+                <td>{{items.name}}</td>
+                <td><img class="nggsrc1" ng-src="{{items.ci}}">{{items.chamber1}}</td>
+                <td>{{items.district}}</td>
+                  <td>{{items.state}}</td>
+                <td>
+                    <a href="#LCarousel" data-slide="next"> <button type="button" class="btn btn-primary" ng-click="scopeviewdet(items.bioguide_id)">View Details</button> </a> </td>
+                     
+               </tr>
+            </tbody>
+              
+          </table>
+                    </div>
+                         <dir-pagination-controls
+       max-size="7"
+       direction-links="true"
+       boundary-links="true" >
+    </dir-pagination-controls>
+                        
+                        
+                </div>
+                    </div>
+				</div>    <!--  TAb for /house -->
+                
+                
+				<div class="tab-pane fade"  id="Senate">
+					  
+                      
+                     <div class="row">
+                    <div class="col-lg-11">
+                    <div class="table-responsive" style="position:relative;float:center;">
+                        <table class="table table-hover  firsttable">
+            <thead>
+                <tr><th colspan=3>Legislators by State</th>
+                <td></td>    
+                <td colspan=2> <label class="sr-only" for="search">Search</label>
+                    <input ng-model="qss" id="searchS" class="form-control" placeholder="Search.."> </td>
+                </tr>
+              <tr>
+                <th>Party</th>
+                <th>Name</th>
+                <th>Chamber</th>
+                
+                  <th>State</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr dir-paginate="items in infos |  filter:qss |orderBy:'name'| itemsPerPage:10 track by $index"> 
+                  
+                <td> <img class="nggsrc" ng-src="{{items.party}}"> </td>
+                <td>{{items.name}}</td>
+                <td><img class="nggsrc1" ng-src="{{items.ci}}">{{items.chamber1}}</td>
+                  <td>{{items.state}}</td>
+                <td><a href="#LCarousel" data-slide="next">
+                    <button type="button" class="btn btn-primary" ng-click="scopeviewdet(items.bioguide_id)">View Details</button></a></td>
+                     
+               </tr>
+            </tbody>
+              
+          </table>
+                    </div>
+                
+                        <dir-pagination-controls
+       max-size="7"
+       direction-links="true"
+       boundary-links="true" >
+    </dir-pagination-controls>
+                         
+                         </div>
+                </div>     <!-- ROW -->  
+				</div>  <!-- TAb Senate -->
+			</div>  <!--  Tab content for 3 tabs -->
+		    
+                             </div>
+                     <!--      ITEM 1 -->
+                    </div>   </div>
+              <div class = "item"> 
+                 <div class="container-fluid cont">   
+                       
+                    <div class="panel panel-default"> <div class="panel-heading">
+                        <div style="display:inline-block"><span><a href="#LCarousel" data-slide="prev"> <i class="fa fa-angle-left" style="font-size:36px"></i> </a></span>
+                        </div> <div style="display:inline-block;position:relative;margin-left:70%;"> <i class="fa fa-star-o" style="font-size:24px" aria-hidden="true"></i> </div> </div> </div>
+                     <div class='row'><div class='col-md-6'>
+                    <div id="ViewDetLegis" ng-bind-html="content1">
+                     </div>
+                         </div>
+                     <div id="View2" style="float:right">   
+                     
+                     </div>
+                         </div> </div> 
+                </div>
+                         </div>      <!-- Carousel slide classs content -->
+             
+                         </div>   </div>
+                 
+                 
+                 
+                 
+                 
+        <div id="bills" class="tab-pane fade">
+            <div id="BCarousel" class="carousel slide" data-interval="false">
+               <div class="carousel-inner">
+            
+                <div class = "item active" id=BCarouselItem1> 
+            
+            <div class="container cont" style="border:1px solid grey">
+              <h2>Bills</h2>  <hr class="style1"/> 
+              
+                <div class="item active">    <!--   ITEM FOR NOT CAROUS -->
+			<ul class="nav nav-tabs ">
+				<li class="active"><a href="#Active" data-toggle="tab">Active Bills</a></li>
+				<li><a href="#NewB" data-toggle="tab">New Bills</a></li>
+			</ul>
+
+			<div class="tab-content">
+				
+                <div class="tab-pane fade in active"  id="Active">
+                <div class="row">
+                    <div class="col-lg-12">
+                     <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div style="display:inline-block">Active Bills  </div> <div style="display:inline-block;position:relative;margin-left:70%;">  <input ng-model="ab" id="Bsearch1" class="form-control" placeholder="Search.."> </div> </div>
+                       
+                         <div class="table-responsive" >
+                        <table class="table  table-hover  firsttable">
+                        <thead>
+              <tr>
+                <th class="col-xs-2">Bill ID</th>
+                <th class="col-xs-1">Bill Type</th>
+                <th class="col-xs-3">Title</th>
+                <th class="col-xs-1">Chamber</th>
+                  <th class="col-xs-1">Introduced On</th>
+                <th class="col-xs-2">Sponsor</th>
+                  <th class="col-xs-1"></th>
+              </tr>
+            </thead>
+            <tbody>
+              
+                <tr dir-paginate="items in actb |  filter:ab | orderBy:'id'| itemsPerPage:10 track by $index"> 
+                  
+                <td>{{items.id}}</td>
+                <td>{{items.btype}}</td>
+                <td>{{items.official_title}}</td>
+                <td><img class="nggsrc1" ng-src="{{items.ci}}">{{items.chamber1}}</td>
+                <td>{{items.introduced_on}}</td>
+                  <td>{{items.name}}</td>
+                <td><a href="#BCarousel" data-slide="next">
+                    <button type="button" class="btn btn-primary" ng-click="billviewdet(items.bill_id)">View Details</button></a></td>
+              </tr>
+            </tbody>
+              
+          </table>
+                    </div>
+               <dir-pagination-controls
+       max-size="7"
+       direction-links="true"
+       boundary-links="true" >
+    </dir-pagination-controls>
+                    </div>
+                </div>    
+				</div>     <!--  ROWW -->
+                </div>   <!--  Tab pane fo rACtive-->
+				
+                <div class="tab-pane fade"  id="NewB">
+					
+                    <div class="row">
+                    <div class="col-lg-12">
+                     <div class="panel panel-default">
+                         <div class="panel-heading">
+                         <div style="display:inline-block"><b>New Bills  </b></div> <div style="display:inline-block;position:relative;margin-left:70%;">  <input ng-model="ab1" id="Bsearch2" class="form-control" placeholder="Search.."> </div></div>
+                        <div class="table-responsive" >
+                        <table class="table  table-hover  firsttable">
+                        <thead>
+              <tr>
+                <th class="col-xs-2">Bill ID</th>
+                <th class="col-xs-1">Bill Type</th>
+                <th class="col-xs-2">Title</th>
+                <th class="col-xs-1">Chamber</th>
+                  <th class="col-xs-1">Introduced On</th>
+                <th class="col-xs-2">Sponsor</th>
+                  <th class="col-xs-1"></th>
+              </tr>
+            </thead>
+            <tbody>
+              
+                <tr dir-paginate="items in newb |  filter:ab1 | itemsPerPage: 10 track by $index"> 
+                  
+                <td>{{items.id}}</td>
+                <td>{{items.btype}}</td>
+                <td>{{items.official_title}}</td>
+                <td><img class="nggsrc1" ng-src="{{items.ci}}">{{items.chamber1}}</td>
+                <td>{{items.introduced_on}}</td>
+                <td>{{items.name}}</td>
+                <td><a href="#BCarousel" data-slide="next">
+                    <button type="button" class="btn btn-primary" ng-click="billviewdet(items.bill_id)">View Details</button></a></td>
+              </tr>
+            </tbody>
+              
+          </table>
+                    </div>
+               <dir-pagination-controls
+       max-size="7"
+       direction-links="true"
+       boundary-links="true" >
+    </dir-pagination-controls>
+                    </div>
+                </div>    
+				</div>  <!--  RZOWW -->
+				</div>    <!--- tab pane for NEw  -->
+                  </div>   <!--  tab content for 2 bill tabs -->
+                </div>
+                    </div> </div>  
+                      <!--    CLose first item carousel-->
+             <div class = "item"> 
+                 <div class="container cont" style="border:1px solid whitesmoke">   
+                       <h2>THIS IS VEIW DETAILS PAGEEEE</h2>
+                     <span><a href="#BCarousel" data-slide="prev"> <i class="fa fa-angle-left" style="font-size:36px"></i> </a></span>
+                    <div id="ViewDetLegis" ng-bind-html="content2">  </div>
+                    </div>
+                </div>
+                   
+                   
+                   </div>
+                </div>   <!-- Inner carousel-->   <!-- Outer CAROUSALLL-->
+             
+                 </div>   <!-- TAB PANE-->   
+                 
+            
+                 
+            <div id="committees" class="tab-pane fade">
+                <div class="container cont" style="border:1px solid lightgrey">
+            <h2>Committees</h2>  <hr class="style1"/> 
+                 <div class="item active">    <!--   ITEM FOR NOT CAROUS -->
+			<ul class="nav nav-tabs ">
+				<li class="active"><a href="#Housee" data-toggle="tab">House</a></li>
+				<li><a href="#Senatee" data-toggle="tab">Senate</a></li>
+				<li><a href="#Joint" data-toggle="tab">Joint</a></li>
+			</ul>
+
+			<div class="tab-content">
+				
+                <div class="tab-pane fade in active"  id="Housee">
+                <div class="row">
+                    <div class="col-lg-12">
+                     <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div style="display:inline-block"><b>House </b></div> <div style="display:inline-block;position:relative;margin-left:70%;">  <input ng-model="cs1" id="Csearch1" class="form-control" placeholder="Search.."> </div> </div>
+                       
+                         <div class="table-responsive" >
+                        <table class="table  table-hover  firsttable">
+                        <thead>
+              <tr>
+                <th class="col-xs-1"></th>
+                <th class="col-xs-1">Chamber</th>
+                <th class="col-xs-2">Committee ID</th>
+                <th class="col-xs-4">Name</th>
+                  <th class="col-xs-2">Parent Committee</th>
+                <th class="col-xs-1">Contact</th>
+                  <th class="col-xs-1">Office</th>
+              </tr>
+            </thead>
+            <tbody>
+              
+                <tr dir-paginate="items in com4 |  filter:cs1 | orderBy:'id'| itemsPerPage:10 track by $index"> 
+                  
+                <td><span style="border 1px solid black"><i class="fa fa-star-o" style="font-size:24px"></i></span></td>
+                <td><img class="nggsrc1" ng-src="{{items.ci}}">{{items.chamber1}}</td>
+                <td>{{items.committee_id}}</td>
+                <td>{{items.name}}</td>
+                <td>{{items.parent_committee_id}}</td>
+                  <td>{{items.phone}}</td>
+                <td>{{items.office}}</td>
+              </tr>
+            </tbody>
+              
+          </table>
+                    </div>
+               <dir-pagination-controls
+       max-size="7"
+       direction-links="true"
+       boundary-links="true" >
+    </dir-pagination-controls>
+                    </div>
+                </div>    
+				</div>     <!--  ROWW -->
+                </div>   <!--  Tab pane fo rACtive-->
+				
+                <div class="tab-pane fade"  id="Senatee">
+					
+                    <div class="row">
+                    <div class="col-lg-12">
+                     <div class="panel panel-default">
+                         <div class="panel-heading">    
+                             <div style="display:inline-block">Senate </div> <div style="display:inline-block;position:relative;margin-left:70%;">  <input ng-model="cs2" id="Csearch2" class="form-control" placeholder="Search.."> </div> </div>
+                        <div class="table-responsive" >
+                        <table class="table  table-hover  firsttable">
+                        <thead>
+              <tr>
+                <th class="col-xs-1"></th>
+                <th class="col-xs-1">Chamber</th>
+                <th class="col-xs-2">Committee ID</th>
+                <th class="col-xs-5">Name</th>
+                  <th class="col-xs-2">Parent Committee</th>
+              </tr>
+            </thead>
+            <tbody>
+              
+                <tr dir-paginate="items in com2 |  filter:cs2 | itemsPerPage: 10 track by $index"> 
+                  
+                <td><span style="border 1px solid black"><i class="fa fa-star-o" style="font-size:24px"></i></span></td>
+                <td><img class="nggsrc1" ng-src="{{items.ci}}">{{items.chamber1}}</td>
+                <td>{{items.committee_id}}</td>
+                <td>{{items.name}}</td>
+                <td>{{items.parent_committee_id}}</td>
+              </tr>
+            </tbody>
+              
+          </table>
+                    </div>
+               <dir-pagination-controls
+       max-size="7"
+       direction-links="true"
+       boundary-links="true" >
+    </dir-pagination-controls>
+                    </div>
+                </div>    
+				</div>  <!--  RZOWW -->
+				</div>    <!--- tab pane for NEw  -->
+                 
+                <div class="tab-pane fade"  id="Joint">
+					
+                    <div class="row">
+                    <div class="col-lg-12">
+                     <div class="panel panel-default">
+                         <div class="panel-heading"><div style="display:inline-block">Joint </div> <div style="display:inline-block;position:relative;margin-left:70%;">  <input ng-model="cs3" id="Csearch3" class="form-control" placeholder="Search.."> </div> </div>
+                        <div class="table-responsive" >
+                        <table class="table  table-hover  firsttable">
+                        <thead>
+              <tr>
+                <th class="col-xs-2"></th>
+                <th class="col-xs-2">Chamber</th>
+                <th class="col-xs-3">Committee ID</th>
+                <th class="col-xs-5">Name</th>
+            
+              </tr>
+            </thead>
+            <tbody>
+              
+                <tr dir-paginate="items in com3 |  filter:cs3 | itemsPerPage: 10 track by $index"> 
+                  
+                <td><span style="border 1px solid black"><i class="fa fa-star-o" style="font-size:24px"></i></span></td>
+                <td><img class="nggsrc1" ng-src="{{items.ci}}">{{items.chamber1}}</td>
+                <td>{{items.committee_id}}</td>
+                <td>{{items.name}}</td>
+              </tr>
+            </tbody>
+              
+          </table>
+                    </div>
+               <dir-pagination-controls
+       max-size="7"
+       direction-links="true"
+       boundary-links="true" >
+    </dir-pagination-controls>
+                    </div>
+                </div>    
+				</div>  <!--  RZOWW -->
+				</div>
+                     
+                     </div>   <!--  tab content for 2 bill tabs -->   
+                   
+                    </div>
+                </div> </div>
+                
+                
+            <div id="favorites" class="tab-pane fade">
+                <div class="container cont" style="border:1px solid blue">
+                       <h2>Favorites</h2>  <hr class="style1"/> 
+                 <div class="item active">    <!--   ITEM FOR NOT CAROUS -->
+			<ul class="nav nav-tabs ">
+				<li class="active"><a href="#fleg" data-toggle="tab">Legislators</a></li>
+				<li><a href="#fbil" data-toggle="tab">Bills</a></li>
+				<li><a href="#fcom" data-toggle="tab">Committees</a></li>
+			</ul>
+
+			<div class="tab-content">
+				
+                <div class="tab-pane fade in active"  id="fleg">
+                <div class="row">
+                    <div class="col-lg-12">
+                     <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div style="display:inline-block"><b>House </b></div> </div>
+                       
+                         <div class="table-responsive" >
+                        <table class="table  table-hover  firsttable">
+                        <thead>
+              <tr>
+                <th class="col-xs-1"></th>
+                <th class="col-xs-1">Chamber</th>
+                <th class="col-xs-2">Committee ID</th>
+                <th class="col-xs-4">Name</th>
+                  <th class="col-xs-2">Parent Committee</th>
+                <th class="col-xs-1">Contact</th>
+                  <th class="col-xs-1">Office</th>
+              </tr>
+            </thead>
+            <tbody>
+              
+                <tr ng-repeat="items in com4 |  filter:cs1 | orderBy:'id'| itemsPerPage:10 track by $index"> 
+                  
+                <td></td>
+                <td><img class="nggsrc1" ng-src="{{items.ci}}">{{items.chamber1}}</td>
+                <td>{{items.committee_id}}</td>
+                <td>{{items.name}}</td>
+                <td>{{items.parent_committee_id}}</td>
+                  <td>{{items.phone}}</td>
+                <td>{{items.office}}</td>
+              </tr>
+            </tbody>
+              
+          </table>
+                    </div>
+               
+                    </div>
+                </div>    
+				</div>     <!--  ROWW -->
+                </div>   <!--  Tab pane fo rACtive-->
+				
+                <div class="tab-pane fade"  id="Senatee">
+					
+                    <div class="row">
+                    <div class="col-lg-12">
+                     <div class="panel panel-default">
+                         <div class="panel-heading">    
+                             <div style="display:inline-block">Senate </div> </div>
+                        <div class="table-responsive" >
+                        <table class="table  table-hover  firsttable">
+                        <thead>
+              <tr>
+                <th class="col-xs-1"></th>
+                <th class="col-xs-1">Chamber</th>
+                <th class="col-xs-2">Committee ID</th>
+                <th class="col-xs-5">Name</th>
+                  <th class="col-xs-2">Parent Committee</th>
+              </tr>
+            </thead>
+            <tbody>
+              
+                <tr ng-repeat="items in com2 |  filter:cs2 | itemsPerPage: 10 track by $index"> 
+                  
+                <td></td>
+                <td><img class="nggsrc1" ng-src="{{items.ci}}">{{items.chamber1}}</td>
+                <td>{{items.committee_id}}</td>
+                <td>{{items.name}}</td>
+                <td>{{items.parent_committee_id}}</td>
+              </tr>
+            </tbody>
+              
+          </table>
+                    </div>
+                    </div>
+                </div>    
+				</div>  <!--  RZOWW -->
+				</div>    <!--- tab pane for NEw  -->
+                 
+                <div class="tab-pane fade"  id="Joint">
+					
+                    <div class="row">
+                    <div class="col-lg-12">
+                     <div class="panel panel-default">
+                         <div class="panel-heading"><div style="display:inline-block">Joint </div> </div>
+                        <div class="table-responsive" >
+                        <table class="table  table-hover  firsttable">
+                        <thead>
+              <tr>
+                <th class="col-xs-2"></th>
+                <th class="col-xs-2">Chamber</th>
+                <th class="col-xs-3">Committee ID</th>
+                <th class="col-xs-5">Name</th>
+            
+              </tr>
+            </thead>
+            <tbody>
+              
+                <tr ng-repeat="items in com3 |  filter:cs3 | itemsPerPage: 10 track by $index"> 
+                  
+                <td></td>
+                <td><img class="nggsrc1" ng-src="{{items.ci}}">{{items.chamber1}}</td>
+                <td>{{items.committee_id}}</td>
+                <td>{{items.name}}</td>
+              </tr>
+            </tbody>
+              
+          </table>
+                    </div>
+               
+                    </div>
+                </div>    
+				</div>  <!--  RZOWW -->
+				</div>
+                     
+                     </div>   <!--  tab content for 2 bill tabs -->   
+                   
+                    </div>
+                </div> </div>
+    
+                
+        </div>  
+                <!--- Tab content -->
+        </div> <!--  CONTAINER   -->
+        
+
+        <p id="demo" > </p>   
+    
+    </body>
+        
+                
+    
+   <!-- jQuery -->
+    
+    
+    
+    <!-- My Script -->
+      <!-- Close My Script -->
+    
+    
+    <script type="text/javascript">   <!-- Menu Toggle Script -->
+    //    angular.element(document).ready(function () {
+            /*
+         /*Menu-toggle*/
+    $("#navtoggle").click(function(e) {
+        //e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+/*   
+        
+            
+$(document).ready(function()
+        
+    
+    /*$("#menu-toggle3").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+        $("#menu-toggle11").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });*/
+    
+</script>         <!-- Closes--- Menu Toggle Script -->
+
+</html>
